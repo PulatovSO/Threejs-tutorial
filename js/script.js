@@ -8,7 +8,10 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 const geometry = new THREE.BoxGeometry( 2, 2, 2 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const texture = new THREE.TextureLoader().load('../textures/box.jpg')
+const material = new THREE.MeshBasicMaterial( { map: texture } );
+// const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+
 const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 
