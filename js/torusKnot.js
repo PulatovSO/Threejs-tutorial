@@ -16,11 +16,20 @@ const knot = new THREE.Mesh(geometry, material);
 scene.add(knot)
 
 // animation
+const cursor = {x: 0, y: 0}
+
+window.addEventListener('mousemove', (e) => {
+    cursor.x = e.clientX / window.innerWidth -0.5;
+    cursor.y = e.clientY / window.innerWidth -0.5;
+})
+
 function animate() {
 	requestAnimationFrame( animate );
 
-	knot.rotation.x += 0.01;
-	knot.rotation.y += 0.01;
+	knot.rotation.y += 0.005;
+
+    camera.position.x += (cursor.x - camera.position.x) / 10;
+    camera.position.y += (-cursor.y - camera.position.y) / 10;
 
 	renderer.render( scene, camera );
 }
