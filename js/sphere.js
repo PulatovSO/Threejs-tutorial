@@ -6,13 +6,20 @@ camera.position.z = 15;
 
 const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild( renderer.domElement );
 
-// sphere geometry
-const geometry = new THREE.SphereGeometry(3, 64, 64);
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const sphere = new THREE.Mesh( geometry, material );
+// sphere
+const geometry = new THREE.SphereGeometry(5, 50, 50);
+const texture = new THREE.TextureLoader().load('../textures/earth.jpg');
+const material = new THREE.MeshMatcapMaterial({map: texture});
+const earth = new THREE.Mesh(geometry, material)
 
-scene.add( sphere );
+scene.add(earth);
 
-renderer.render( scene, camera );
+const animate = () => {
+    requestAnimationFrame( animate );
+    renderer.render( scene, camera );
+}
+
+animate()
