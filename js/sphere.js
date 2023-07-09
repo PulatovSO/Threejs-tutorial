@@ -6,10 +6,10 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 camera.position.z = 15;
 
 const canvas = document.querySelector('.canvas');
-const renderer = new THREE.WebGLRenderer({canvas, antialias: true});
+const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio(window.devicePixelRatio)
-
+document.body.appendChild( renderer.domElement );
 
 // sphere
 const geometry = new THREE.SphereGeometry(5, 50, 50);
@@ -25,11 +25,11 @@ light.position.set(10, 5, 10);
 scene.add(earth, light)
 
 // controls
-const controls = new OrbitControls(camera, canvas);
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.enableZoom = false;
-controls.enablePan = false;
+controls.update();
 
+// animation
 const animate = () => {
     requestAnimationFrame( animate );
 
